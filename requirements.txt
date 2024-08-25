@@ -1,6 +1,8 @@
 jupyter
 ipykernel
+ruff
 scikit-learn
 pandas
 beautifulsoup4
 requests
+retry
