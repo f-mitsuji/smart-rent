@@ -1,4 +1,6 @@
 .venv/
+.mypy_cache/
+.ruff_cache/
+.vscode/
 ml/data/
 ml/notebooks/
-.mypy_cache/
