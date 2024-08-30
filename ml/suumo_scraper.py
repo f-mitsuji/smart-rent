@@ -1,27 +1,20 @@
 import logging
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
 
 import arrow
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from ml_settings import LOGS_DIR, RAW_DATA_DIR
 from retry import retry
 
 SUUMO_BASE_URL = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?fw2=&mt=9999999&cn=9999999&ta=13&et=9999999&sc=13214&shkr1=03&ar=030&bs=040&ct=9999999&shkr3=03&shkr2=03&srch_navi=1&mb=0&shkr4=03&cb=0.0&page={}"
 MAX_PAGES_TO_SCRAPE = 52
-ML_DIR = Path("ml/")
-DATA_DIR = ML_DIR / "data"
-RAW_DATA_DIR = DATA_DIR / "raw"
 
 timestamp = arrow.now("Asia/Tokyo").format("YYYYMMDD_HHmmss")
 OUTPUT_FILENAME = f"{timestamp}_suumo_rental_properties.csv"
 LOG_FILENAME = f"{timestamp}_suumo_scraper.log"
-
-logging.basicConfig(
-    filename=DATA_DIR / LOG_FILENAME, level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
 
 
 @dataclass
@@ -127,9 +120,12 @@ def scrape_suumo_listings(max_pages: int = MAX_PAGES_TO_SCRAPE) -> list[Property
 def save_listings_to_csv(listings: list[PropertyListing], filename: str = OUTPUT_FILENAME):
     property_df = pd.DataFrame([asdict(listing) for listing in listings])
     property_df.to_csv(RAW_DATA_DIR / filename, index=False)
-    logging.info(f"SUUMO listings data saved to {filename}")
+    logging.info(f"SUUMO listings data saved to {RAW_DATA_DIR / filename}")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        filename=LOGS_DIR / LOG_FILENAME, level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    )
     suumo_listings = scrape_suumo_listings()
     save_listings_to_csv(suumo_listings, OUTPUT_FILENAME)
