@@ -1,0 +1,9 @@
+arrow
+beautifulsoup4
+ipykernel
+jupyter
+optuna
+pandas
+requests
+retry
+scikit-learn
