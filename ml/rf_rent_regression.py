@@ -2,11 +2,12 @@ import joblib
 import optuna
 import pandas as pd
 from data_preprocessor import PROCESSED_DATA_PATH
-from ml_settings import MODEL_DIR
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.preprocessing import StandardScaler
+
+from .ml_settings import MODEL_DIR
 
 MODEL_PATH = MODEL_DIR / "suumo_rent_prediction_model.pkl"
 

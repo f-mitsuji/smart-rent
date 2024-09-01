@@ -6,8 +6,9 @@ import arrow
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from ml_settings import LOGS_DIR, RAW_DATA_DIR
 from retry import retry
+
+from .ml_settings import LOGS_DIR, RAW_DATA_DIR
 
 SUUMO_BASE_URL = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?fw2=&mt=9999999&cn=9999999&ta=13&et=9999999&sc=13214&shkr1=03&ar=030&bs=040&ct=9999999&shkr3=03&shkr2=03&srch_navi=1&mb=0&shkr4=03&cb=0.0&page={}"
 MAX_PAGES_TO_SCRAPE = 52

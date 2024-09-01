@@ -3,7 +3,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from ml_settings import PROCESSED_DATA_DIR, RAW_DATA_DIR
+
+from .ml_settings import PROCESSED_DATA_DIR, RAW_DATA_DIR
 
 RAW_DATA_PATH = RAW_DATA_DIR / "suumo_rental_properties.csv"
 PROCESSED_DATA_PATH = PROCESSED_DATA_DIR / "suumo_rental_properties_cleaned2.csv"
